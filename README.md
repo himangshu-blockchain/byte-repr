@@ -39,14 +39,7 @@ fn main() {
 
 ### Example Output:
 
-```
-Hello, Representing in following formats for: 42 (u16)
- Binary representation                      : 101010 
- Little-endian byte array                   : [42, 0] 
- Hex memory (LE) with 2-digit zero padding  : [2a, 00] 
- Big-endian byte array                      : [0, 42] 
- Hex memory (BE) with 2-digit zero padding  : [00, 2a] 
-```
+![example output](docs/example_output.png)
 
 ## 🔧 Supported Types
 
