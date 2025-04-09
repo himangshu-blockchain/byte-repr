@@ -9,7 +9,7 @@ repository = "https://github.com/himangshu-blockchain/byte-repr"
 documentation = "https://docs.rs/byte-repr"
 readme = "README.md"
 keywords = ["binary", "memory", "byte", "representation", "debug"]
-categories = ["development-tools", "debugging", "data-structures"]
+categories = ["development-tools::debugging", "data-structures"]
 exclude = ["/.github", "/.gitignore"]
 
 [lib]
