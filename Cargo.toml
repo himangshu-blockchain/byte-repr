@@ -6,10 +6,15 @@ authors = ["Himangshu Pan <himangshu.blockchain@gmail.com>"]
 description = "A utility to inspect binary, little-endian, and big-endian memory representations of numbers."
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/himangshu-blockchain/byte-repr"
+documentation = "https://docs.rs/byte-repr"
 readme = "README.md"
 keywords = ["binary", "memory", "byte", "representation", "debug"]
 categories = ["development-tools", "debugging", "data-structures"]
+exclude = ["/.github", "/.gitignore"]
 
 [lib]
 name = "byte_repr"
 path = "src/lib.rs"
+
+[badges]
+travis-ci = { repository = "himangshu-blockchain/byte-repr" }
