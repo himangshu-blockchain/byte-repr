@@ -1,12 +1,13 @@
-# Changelog
+# 📦 Changelog
 
-## [0.2.0] - 2025-04-10
-### Added
-- Support for all unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`, `usize`
-- Split test cases by type
+## ✨ [0.2.0] - 2025-04-10
 
-### Changed
-- Refactored tests and documentation for all types
+### ✅ Added
+- 🧮 Support for all unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`, `usize`
+- 🧪 Split test cases by type for better organization
 
-### Fixed
-- Minor test consistency issues
+### 🔧 Changed
+- 🧹 Refactored tests and documentation for all supported types
+
+### 🐛 Fixed
+- 🔍 Minor test consistency issues
