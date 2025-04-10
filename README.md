@@ -5,24 +5,34 @@
 [![Build Status](https://github.com/himangshu-blockchain/byte-repr/workflows/CI/badge.svg)](https://github.com/himangshu-blockchain/byte-repr/actions)
 [![MIT/Apache-2.0 licensed](https://img.shields.io/crates/l/byte-repr)](https://github.com/himangshu-blockchain/byte-repr/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/crates/d/byte-repr.svg)](https://crates.io/crates/byte-repr)
-[![MSRV](https://img.shields.io/badge/MSRV-1.60+-blue.svg)](https://docs.rs/byte-repr)  <!-- Change 1.60+ to your actual MSRV -->
+[![MSRV](https://img.shields.io/badge/MSRV-1.60+-blue.svg)](https://docs.rs/byte-repr)
 
-`byte-repr` is a lightweight Rust crate for inspecting the memory representation of numeric values. It helps visualize the binary, little-endian, and big-endian byte representations, including their hex format with zero padding.
+> A lightweight utility for inspecting and learning about memory representation of integer types in Rust.
+
+---
+
+## 📘 Overview
+
+`byte-repr` is a simple, extensible Rust crate to help visualize how numeric types are represented in memory. It supports both **little-endian** and **big-endian** byte formats, **binary representation**, and **hex with zero-padding**. 
 
 Useful for:
-- Learning and teaching byte order (endianness)
-- Debugging binary data
-- Understanding how integers are stored in memory
+- 🧠 Learning & teaching endianness and bit-level encoding
+- 🛠️ Debugging binary data
+- 🧬 Understanding low-level memory layouts in Rust
+
+---
 
 ## ✨ Features
 
-- Print values in:
-  - Binary format
+- 📦 Print values in:
+  - Binary format (grouped bits)
   - Little-endian byte array
   - Big-endian byte array
-  - Hexadecimal representation with zero padding
-- Color-coded output for clarity
-- Macro-based extensibility for numeric types
+  - Hexadecimal representation (zero-padded)
+- 🧩 Macro-based extensibility for custom numeric types
+- 🧪 Tested against all supported integer types
+- 🎨 **Color-coded output for clarity**
+---
 
 ## 🚀 Usage
 
@@ -54,9 +64,43 @@ Currently supports:
 - `i8`
 - `u16`
 - `u32`
+- `u64`
+- `u128`
+- `usize`
 
-More can be added using the `impl_byterep!` macro.
+✅ `impl_byterep!` macro makes it easy to extend support to custom numeric types.
+
+## ⚠️ Limitations
+- ❌ Not yet #![no_std] compatible
+
+- ❌ No support for wasm32 (WebAssembly) targets
+
+- 📌 Relies on println! for display, which isn't available in no_std or wasm
+
+✅ These will be addressed in upcoming versions. Stay tuned!
+
+
+## 🧪 Tests
+Includes integration tests for:
+
+- Endianness checks
+- Binary and hex formatting
+- Trait conformance per type
+- Visual rendering test (smoke check)
 
 ## 📦 License
 
-Licensed under MIT OR Apache-2.0.
+- Licensed under the [MIT License](LICENSE-MIT). 
+
+See the [LICENSE-MIT](LICENSE-MIT) file for details.
+
+
+
+## 📑 Changelog
+See [CHANGELOG.md](./CHANGELOG.md) for a history of changes.
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://himangshu-blockchain.github.io/">Himangshu Pan</a>
+</p>

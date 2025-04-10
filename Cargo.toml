@@ -1,10 +1,10 @@
 [package]
 name = "byte-repr"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 authors = ["Himangshu Pan <himangshu.blockchain@gmail.com>"]
 description = "A utility to inspect binary, little-endian, and big-endian memory representations of numbers."
-license = "MIT OR Apache-2.0"
+license = "MIT"
 repository = "https://github.com/himangshu-blockchain/byte-repr"
 documentation = "https://docs.rs/byte-repr"
 readme = "README.md"
