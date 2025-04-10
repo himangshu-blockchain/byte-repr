@@ -21,7 +21,7 @@ pub trait ByteRepr {
 }
 
 /// A macro to implement the `ByteRepr` trait for primitive numeric types
-/// (e.g., `i8`, `u16`, `u32`, `f64`, etc.).
+/// (e.g., `u8`, `u16`, `u32`, `f64`, etc.).
 ///
 /// It uses the type's built-in methods `to_le_bytes()` and `to_be_bytes()`
 /// and converts the resulting fixed-size byte arrays into dynamic vectors.
@@ -38,10 +38,13 @@ macro_rules! impl_byterep {
     };
 }
 
-// Implement ByteRepr for selected types
-impl_byterep!(i8);
+// Implement ByteRepr for all unsigned integer types
+impl_byterep!(u8);
 impl_byterep!(u16);
 impl_byterep!(u32);
+impl_byterep!(u64);
+impl_byterep!(u128);
+impl_byterep!(usize);
 
 /// A generic function that prints multiple memory-level representations
 /// of a numeric value, including binary, little-endian, and big-endian formats.
@@ -65,9 +68,23 @@ impl_byterep!(u32);
 ///
 /// ```rust
 /// use byte_repr::represent;
+///     let x = 255u8;
+///     represent(&x);
 ///
-/// let val = 42u16;
-/// represent(&val); // Should print representations to stdout
+///     let x = 65535u16;
+///     represent(&x);
+///
+///     let x = 4294967295u32;
+///     represent(&x);
+///
+///     let x = 18446744073709551615u64;
+///     represent(&x);
+///
+///     let x = 340282366920938463463374607431768211455u128;
+///     represent(&x);
+///
+///     let x = 18446744073709551615usize;
+///     represent(&x);
 /// ```
 pub fn represent<T>(value: &T)
 where
@@ -111,49 +128,33 @@ where
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_byte_repr_trait_for_i8() {
-        let val: i8 = 0x12;
-        let expected_le = val.to_le_bytes().to_vec();
-        let expected_be = val.to_be_bytes().to_vec();
-        assert_eq!(ByteRepr::to_le_bytes(&val), expected_le);
-        assert_eq!(ByteRepr::to_be_bytes(&val), expected_be);
-    }
-    #[test]
-    fn test_byte_repr_trait_for_i8_negetive_127() {
-        let val: i8 = -127;
-        let expected_le = val.to_le_bytes().to_vec();
-        let expected_be = val.to_be_bytes().to_vec();
-        assert_eq!(ByteRepr::to_le_bytes(&val), expected_le);
-        assert_eq!(ByteRepr::to_be_bytes(&val), expected_be);
-    }
-    #[test]
-    fn test_byte_repr_trait_for_u16() {
-        let val: u16 = 0x1234;
-        let expected_le = val.to_le_bytes().to_vec();
-        let expected_be = val.to_be_bytes().to_vec();
-        assert_eq!(ByteRepr::to_le_bytes(&val), expected_le);
-        assert_eq!(ByteRepr::to_be_bytes(&val), expected_be);
+    macro_rules! test_unsigned {
+        ($name:ident, $ty:ty, $val:expr) => {
+            #[test]
+            fn $name() {
+                let val: $ty = $val;
+                let expected_le = val.to_le_bytes().to_vec();
+                let expected_be = val.to_be_bytes().to_vec();
+                assert_eq!(ByteRepr::to_le_bytes(&val), expected_le);
+                assert_eq!(ByteRepr::to_be_bytes(&val), expected_be);
+            }
+        };
     }
 
-    #[test]
-    fn test_byte_repr_trait_for_u32() {
-        let val: u32 = 0x123456;
-        let expected_le = val.to_le_bytes().to_vec();
-        let expected_be = val.to_be_bytes().to_vec();
-        assert_eq!(ByteRepr::to_le_bytes(&val), expected_le);
-        assert_eq!(ByteRepr::to_be_bytes(&val), expected_be);
-    }
+    test_unsigned!(test_u8, u8, 0x12);
+    test_unsigned!(test_u16, u16, 0x1234);
+    test_unsigned!(test_u32, u32, 0x12345678);
+    test_unsigned!(test_u64, u64, 0x1234567890abcdef);
+    test_unsigned!(test_u128, u128, 0x1234567890abcdef1122334455667788);
+    test_unsigned!(test_usize, usize, 0x1234);
 
     #[test]
     fn test_represent_does_not_panic() {
-        let val: i8 = 127;
-        represent(&val);
-        let val: i8 = -127;
-        represent(&val);
-        let val: u16 = 65535;
-        represent(&val);
-        let val: u32 = 4294967295;
-        represent(&val);
+        represent(&42u8);
+        represent(&42u16);
+        represent(&42u32);
+        represent(&42u64);
+        represent(&42u128);
+        represent(&42usize);
     }
 }
